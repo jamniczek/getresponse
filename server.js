@@ -15,11 +15,17 @@ app.get('/', (req, res) => {
     headers: {'X-Auth-Token': keys.getResponseToken}
     }).then(response => {
         console.log(response);
-        res.send(response.data)
+        res.send(response.data);
     }).catch(err => {
         console.log(err);
     })
 });
+
+app.post('/test', (req, res) => {
+    const chatFuelData = req.body;
+    console.log(chatFuelData);
+    res.send(chatFuelData);
+})
 
 app.post('/contact', (req, res) => {
     const { firstName } = req.body;
