@@ -22,10 +22,10 @@ app.get('/', (req, res) => {
 });
 
 app.post('/test', (req, res) => {
-    const chatFuelData = req.body;
-    // const formattedData = JSON.parse('{"' + decodeURI(chatFuelData.replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}');
-    const firstName = chatFuelData['first+name'];
-    const lastName = chatFuelData['last+name'];
+    const botData = req.body;
+
+    const userName = result.parameters.userName[0];
+    const userEmail = result.parameters.email[0];
     console.log(chatFuelData);
 
     axios({
@@ -33,8 +33,8 @@ app.post('/test', (req, res) => {
         url: 'https://api.getresponse.com/v3/contacts',
         headers: {'X-Auth-Token': keys.getResponseToken},
         data: {
-            name: `${firstName} ${lastName}`,
-            // email: email,
+            name: userName,
+            email: userEmail,
             campaign: {
                 campaignId: keys.campaignId
             },
