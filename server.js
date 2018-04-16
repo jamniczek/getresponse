@@ -23,9 +23,9 @@ app.get('/', (req, res) => {
 
 app.post('/test', (req, res) => {
     const chatFuelData = req.body;
-    const formattedData = JSON.parse('{"' + decodeURI(chatFuelData.replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}');
-    const firstName = formatedData['first+name'];
-    const lastName = formatedData['last+name'];
+    // const formattedData = JSON.parse('{"' + decodeURI(chatFuelData.replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}');
+    const firstName = chatFuelData['first+name'];
+    const lastName = chatFuelData['last+name'];
     console.log(chatFuelData);
 
     axios({
