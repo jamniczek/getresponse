@@ -23,8 +23,28 @@ app.get('/', (req, res) => {
 
 app.post('/test', (req, res) => {
     const chatFuelData = req.body;
+    const formattedData = JSON.parse('{"' + decodeURI(chatFuelData.replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}');
+    const firstName = formatedData['first+name'];
+    const lastName = formatedData['last+name'];
     console.log(chatFuelData);
-    res.send(chatFuelData);
+
+    axios({
+        method: 'post',
+        url: 'https://api.getresponse.com/v3/contacts',
+        headers: {'X-Auth-Token': keys.getResponseToken},
+        data: {
+            name: `${firstName} ${lastName}`,
+            // email: email,
+            campaign: {
+                campaignId: keys.campaignId
+            },
+        }
+    }).then(response => {
+        res.send('all good ' + response);
+    }).catch(err => {
+        res.send('no idea what happened ' + err);
+    })
+    
 })
 
 app.post('/contact', (req, res) => {
