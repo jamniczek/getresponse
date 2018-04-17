@@ -25,8 +25,8 @@ app.get('/', (req, res) => {
 app.post('/test', (req, res) => {
     const botData = req.body;
 
-    const userName = result.parameters.userName[0];
-    const userEmail = result.parameters.email[0];
+    const userName = botData.result.parameters.userName[0];
+    const userEmail = botData.result.parameters.email[0];
     console.log(`botData: ${botData}
                 userName: ${userName}
                 userEmail: ${userEmail}`);
