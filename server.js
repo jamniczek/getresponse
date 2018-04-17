@@ -7,7 +7,13 @@ const keys = require('./config/keys');
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+let test = userName + ' dupa ' + userEmail;
+
 app.use(bodyParser.json());
+
+app.get('/result', (req, res) => {
+    res.send(test);
+});
 
 app.get('/', (req, res) => {
     axios({method: 'get',
@@ -70,6 +76,13 @@ app.post('/contact', (req, res) => {
     })
 
     console.log(req.body);
+});
+
+app.post('/df', (req, res) => {
+    const userName = result.parameters.userName[0];
+    const userEmail = result.parameters.email[0];
+
+    res.send(userName + ' dupa ' + userEmail);
 });
 
 app.listen(PORT, () => {
