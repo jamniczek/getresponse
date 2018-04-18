@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const bodyParser = require('body-parser');
+const facebookProfile = require('./facebookProfile');
 
 const keys = require('./config/keys');
 
@@ -28,6 +29,8 @@ app.post('/contact', (req, res) => {
     const userEmail = botData.result.parameters.email[0];
     const userPsid = botData.originalRequest.data.sender.id;
     console.log(`email: ${userEmail} |||||||| psid: ${userPsid}`);
+    
+    facebookProfile.getUserProfile(userPsid);
 
     // axios({
     //     method: 'post',
