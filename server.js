@@ -51,7 +51,7 @@ app.post('/contact', (req, res) => {
 })
 
 app.post('/test', (req, res) => {
-    console.log(req.body);
+    console.log(req.body.originalRequest.data);
 });
 
 app.post('/df', (req, res) => {
