@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
     })
 });
 
-app.post('/test', (req, res) => {
+app.post('/contact', (req, res) => {
     const botData = req.body;
 
     const userName = botData.result.parameters.userName[0];
@@ -50,28 +50,7 @@ app.post('/test', (req, res) => {
     
 })
 
-app.post('/contact', (req, res) => {
-    const { firstName } = req.body;
-    const { lastName } = req.body;
-    const { email } =  req.body;
-
-    axios({
-        method: 'post',
-        url: 'https://api.getresponse.com/v3/contacts',
-        headers: {'X-Auth-Token': keys.getResponseToken},
-        data: {
-            name: `${firstName} ${lastName}`,
-            email: email,
-            campaign: {
-                campaignId: keys.campaignId
-            },
-        }
-    }).then(response => {
-        res.send('all good ' + response);
-    }).catch(err => {
-        res.send('no idea what happened ' + err);
-    })
-
+app.post('/test', (req, res) => {
     console.log(req.body);
 });
 
