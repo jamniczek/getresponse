@@ -25,30 +25,28 @@ app.get('/', (req, res) => {
 app.post('/contact', (req, res) => {
     const botData = req.body;
 
-    const userName = botData.result.parameters.userName[0];
     const userEmail = botData.result.parameters.email[0];
-    console.log(`botData: ${botData}
-                userName: ${userName}
-                userEmail: ${userEmail}`);
+    const userPsid = botData.originalRequest.data.sender.id;
+    console.log(`email: ${userEmail} |||||||| psid: ${userPsid}`);
 
-    axios({
-        method: 'post',
-        url: 'https://api.getresponse.com/v3/contacts',
-        headers: {'X-Auth-Token': keys.getResponseToken},
-        data: {
-            name: userName,
-            email: userEmail,
-            campaign: {
-                campaignId: keys.campaignId
-            },
-        }
-    }).then(response => {
-        res.send('all good ' + response);
-    }).catch(err => {
-        res.send('no idea what happened ' + err);
-    })
+    // axios({
+    //     method: 'post',
+    //     url: 'https://api.getresponse.com/v3/contacts',
+    //     headers: {'X-Auth-Token': keys.getResponseToken},
+    //     data: {
+    //         name: userName,
+    //         email: userEmail,
+    //         campaign: {
+    //             campaignId: keys.campaignId
+    //         },
+    //     }
+    // }).then(response => {
+    //     res.send('all good ' + response);
+    // }).catch(err => {
+    //     res.send('no idea what happened ' + err);
+    // })
     
-})
+});
 
 app.post('/test', (req, res) => {
     console.log(req.body.originalRequest.data);
