@@ -30,7 +30,35 @@ app.post('/contact', (req, res) => {
     const userPsid = botData.originalRequest.data.sender.id;
     console.log(`email: ${userEmail} |||||||| psid: ${userPsid}`);
     
-    facebookProfile.getUserProfile(userPsid)
+    // facebookProfile.getUserProfile(userPsid)
+
+    axios.get(`https://graph.facebook.com/v2.6/${userPsid}?fields=first_name,last_name,profile_pic&access_token=${keys.fbPageAccessToken}`)
+    .then(response => {
+        
+        const userProfile = {userFullName: `${response.data.first_name} ${response.data.last_name}` }
+        console.log('this comes from facebookProfile function: ' + response.data.first_name);
+        
+        return axios({
+                method: 'post',
+                url: 'https://api.getresponse.com/v3/contacts',
+                headers: {'X-Auth-Token': keys.getResponseToken},
+                data: {
+                    name: userProfile.userFullName,
+                    email: userEmail,
+                    campaign: {
+                        campaignId: keys.campaignId
+                    },
+                }
+            })   
+
+    }).then((responseTwo)=>{
+        console.log('DUPSKO RECEIVED');
+        console.log(responseTwo);
+    }).catch(err => {
+        console.log(err);
+    });
+    
+
 
     // axios({
     //     method: 'post',
