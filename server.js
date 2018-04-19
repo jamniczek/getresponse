@@ -30,7 +30,7 @@ app.post('/contact', (req, res) => {
     const userPsid = botData.originalRequest.data.sender.id;
     console.log(`email: ${userEmail} |||||||| psid: ${userPsid}`);
     
-    facebookProfile.dupsko(userPsid)
+    facebookProfile.getUserProfile(userPsid)
 
     // axios({
     //     method: 'post',
