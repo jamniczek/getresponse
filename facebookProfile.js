@@ -10,13 +10,19 @@ function getUserProfile(psidArg) {
         console.log('this comes from facebookProfile function: ' + response.data.first_name);
 
         return getResponseSaveUser(userProfile.userFullName, userEmail)   
+    })
+    .then(res2 => {
+
+        console.log(JSON.stringify(res2,undefined,2));
+
+
     }).catch(err => {
         console.log(err);
     });
 };
 
 function getResponseSaveUser(userNameArg, userEmailArg) {
-    axios({
+        return  axios({
         method: 'post',
         url: 'https://api.getresponse.com/v3/contacts',
         headers: {'X-Auth-Token': keys.getResponseToken},
