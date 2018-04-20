@@ -28,15 +28,12 @@ app.post('/contact', (req, res) => {
 
     const userEmail = botData.result.parameters.email[0];
     const userPsid = botData.originalRequest.data.sender.id;
-    console.log(`email: ${userEmail} |||||||| psid: ${userPsid}`);
-    
-    // facebookProfile.getUserProfile(userPsid)
+    console.log(`---------------------------------email: ${userEmail} |||||||| psid: ${userPsid}---------------------------------------------------`);
 
     axios.get(`https://graph.facebook.com/v2.6/${userPsid}?fields=first_name,last_name,profile_pic&access_token=${keys.fbPageAccessToken}`)
     .then(response => {
         
         const userProfile = {userFullName: `${response.data.first_name} ${response.data.last_name}` }
-        console.log('this comes from facebookProfile function: ' + response.data.first_name);
         
         return axios({
                 method: 'post',
@@ -50,48 +47,15 @@ app.post('/contact', (req, res) => {
                     },
                 }
             })   
-
     }).then((responseTwo)=>{
-        console.log('DUPSKO RECEIVED');
-        console.log(responseTwo);
+        console.log('responseTwo done!');
     }).catch(err => {
         console.log(err);
     });
-    
-
-
-    // axios({
-    //     method: 'post',
-    //     url: 'https://api.getresponse.com/v3/contacts',
-    //     headers: {'X-Auth-Token': keys.getResponseToken},
-    //     data: {
-    //         name: userName,
-    //         email: userEmail,
-    //         campaign: {
-    //             campaignId: keys.campaignId
-    //         },
-    //     }
-    // }).then(response => {
-    //     res.send('all good ' + response);
-    // }).catch(err => {
-    //     res.send('no idea what happened ' + err);
-    // })
-    
-});
-
-app.post('/test', (req, res) => {
-    console.log(req.body.originalRequest.data);
-});
-
-app.post('/df', (req, res) => {
-    const userName = result.parameters.userName[0];
-    const userEmail = result.parameters.email[0];
-
-    res.send(userName + ' dupa ' + userEmail);
-});
 
 app.listen(PORT, () => {
     console.log('Up and running');
 });
 
 
+https://graph.facebook.com/v2.6/${userPsid}?fields=first_name,last_name,profile_pic&access_token=EAAbyWVtNSRoBAMh8ZAkTp54RquZAtfiKNPQGmTFS4Tk6P0ZBuwEXfrmo7q5I9i8H2u7alZAZC79m1LJHQY2ZCqaymwG4565NjMrKFsZB7KMosFVUcGlxh5UIafgrsvkzRsZCraeArYtSFundX7TMSpFHkIsUPDjriCM4L7dL65cy7sZB9K4GNCkor
