@@ -28,7 +28,7 @@ app.post('/contact', (req, res) => {
 
     const userEmail = botData.result.parameters.email[0];
     const userPsid = botData.originalRequest.data.sender.id;
-    console.log(`---------------------------------email: ${userEmail} |||||||| psid: ${userPsid}---------------------------------------------------`);
+    console.log(`email: ${userEmail} |||||||| psid: ${userPsid}`);
 
     axios.get(`https://graph.facebook.com/v2.6/${userPsid}?fields=first_name,last_name,profile_pic&access_token=${keys.fbPageAccessToken}`)
     .then(response => {
@@ -47,15 +47,16 @@ app.post('/contact', (req, res) => {
                     },
                 }
             })   
-    }).then((responseTwo)=>{
+
+    }).then(responseTwo => {
         console.log('responseTwo done!');
     }).catch(err => {
         console.log(err);
     });
+});
 
 app.listen(PORT, () => {
     console.log('Up and running');
 });
 
 
-https://graph.facebook.com/v2.6/${userPsid}?fields=first_name,last_name,profile_pic&access_token=EAAbyWVtNSRoBAMh8ZAkTp54RquZAtfiKNPQGmTFS4Tk6P0ZBuwEXfrmo7q5I9i8H2u7alZAZC79m1LJHQY2ZCqaymwG4565NjMrKFsZB7KMosFVUcGlxh5UIafgrsvkzRsZCraeArYtSFundX7TMSpFHkIsUPDjriCM4L7dL65cy7sZB9K4GNCkor
