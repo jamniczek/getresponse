@@ -30,14 +30,14 @@ app.post('/contact', (req, res) => {
     const userPsid = botData.originalRequest.data.sender.id;
     console.log(`email: ${userEmail} |||||||| psid: ${userPsid}`);
 
-    axios.get(`https://graph.facebook.com/v2.6/${userPsid}?fields=first_name,last_name,profile_pic&access_token=${keys.fbPageAccessToken}`)
+    axios.get(`https://graph.facebook.com/v2.6/${userPsid}?fields=first_name,last_name,profile_pic,locale&access_token=${keys.fbPageAccessToken}`)
     .then(response => {
         
         const userProfile = {
                             userFullName: `${response.data.first_name} ${response.data.last_name},`,
                             userLocale: `${campaign.chooseCampaign(response.data.locale)}`
         }
-        console.log(response.data.locale);
+        console.log(response.data);
         console.log('000000000000000000000000000'+ userProfile. userFullName + userProfile.userLocale + 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
         
         return axios({
