@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const bodyParser = require('body-parser');
-const facebookProfile = require('./facebookProfile');
+const campaign = require('./utils/campaign');
 
 const keys = require('./config/keys');
 
@@ -33,7 +33,10 @@ app.post('/contact', (req, res) => {
     axios.get(`https://graph.facebook.com/v2.6/${userPsid}?fields=first_name,last_name,profile_pic&access_token=${keys.fbPageAccessToken}`)
     .then(response => {
         
-        const userProfile = {userFullName: `${response.data.first_name} ${response.data.last_name}` }
+        const userProfile = {
+                            userFullName: `${response.data.first_name} ${response.data.last_name},`,
+                            userLocale: `${campaign.chooseCampaign(response.data.locale)}`
+                            }
         
         return axios({
                 method: 'post',
@@ -43,7 +46,7 @@ app.post('/contact', (req, res) => {
                     name: userProfile.userFullName,
                     email: userEmail,
                     campaign: {
-                        campaignId: keys.campaignId
+                        campaignId: userProfile.userLocale
                     },
                 }
             })   
