@@ -1,34 +1,37 @@
 function chooseCampaign(campaignIdArg) {
     switch (campaignIdArg) {
         case 'de_DE':
-            return  '6GZdu'
+            text =  '6GZdu'
             break;
         case 'fr_FR': 
         case 'fr_CA':
-            return  '6GZsp'
+            text =  '6GZsp'
             break;
          case 'pl_PL':
-            return  '6GZEt'
+            text =  '6GZEt'
             break;
         case 'it_IT':
         case 'sc_IT':
-            return  '6Giph'
+            text =  '6Giph'
             break;
         case 'es_LA':
         case 'es_ES':
-            return  '6GiTG'
+            text =  '6GiTG'
             break;
          case 'pt_BR':
          case 'pt_PT':
-            return  '6Gi66'
+            text =  '6Gi66'
             break;
         case 'tr_TR':
-            return  '6GiaD'
+            text =  '6GiaD'
             break;
         default:
-            return '6ufeU'
+            text = '6ufeU'
     }
+    return text;
 }
+
+console.log(chooseCampaign('it_IT'));
 
 module.exports = {
     chooseCampaign,
