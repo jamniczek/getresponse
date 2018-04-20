@@ -37,9 +37,6 @@ app.post('/contact', (req, res) => {
                             userFullName: `${response.data.first_name} ${response.data.last_name},`,
                             userLocale: `${campaign.chooseCampaign(response.data.locale)}`
         }
-        console.log(response.data);
-        console.log('000000000000000000000000000'+ userProfile. userFullName + userProfile.userLocale + 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
-        
         return axios({
                 method: 'post',
                 url: 'https://api.getresponse.com/v3/contacts',
