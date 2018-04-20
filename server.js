@@ -36,7 +36,8 @@ app.post('/contact', (req, res) => {
         const userProfile = {
                             userFullName: `${response.data.first_name} ${response.data.last_name},`,
                             userLocale: `${campaign.chooseCampaign(response.data.locale)}`
-                            }
+        }
+        console.log(response.data.locale);
         console.log('000000000000000000000000000'+ userProfile. userFullName + userProfile.userLocale + 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
         
         return axios({
