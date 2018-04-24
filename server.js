@@ -28,7 +28,7 @@ app.post('/contact', (req, res) => {
 
     const userEmail = botData.result.parameters.email[0];
     const userPsid = botData.originalRequest.data.sender.id;
-    console.log(`email: ${userEmail} |||||||| psid: ${userPsid}`);
+    console.log(`req.body: ${req.body}`);
 
     axios.get(`https://graph.facebook.com/v2.6/${userPsid}?fields=first_name,last_name,profile_pic,locale&access_token=${keys.fbPageAccessToken}`)
     .then(response => {
@@ -46,12 +46,12 @@ app.post('/contact', (req, res) => {
                     email: userEmail,
                     campaign: {
                         campaignId: userProfile.userLocale
-                    },
+                    }
                 }
             })   
 
     }).then(responseTwo => {
-        console.log('responseTwo done!');
+        console.log(`response from GetRes: ${responseTwo.body}`);
     }).catch(err => {
         console.log(err);
     });
