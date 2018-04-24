@@ -28,7 +28,7 @@ app.post('/contact', (req, res) => {
 
     const userEmail = botData.result.parameters.email[0];
     const userPsid = botData.originalRequest.data.sender.id;
-    console.log(`req.body: ${JSON.stringify(req.body)}`);
+    // console.log(`req.body: ${JSON.stringify(req.body)}`);
 
     axios.get(`https://graph.facebook.com/v2.6/${userPsid}?fields=first_name,last_name,profile_pic,locale&access_token=${keys.fbPageAccessToken}`)
     .then(response => {
@@ -37,6 +37,7 @@ app.post('/contact', (req, res) => {
                             userFullName: `${response.data.first_name} ${response.data.last_name},`,
                             userLocale: `${campaign.chooseCampaign(response.data.locale)}`
         }
+        console.log(userProfile)
         return axios({
                 method: 'post',
                 url: 'https://api.getresponse.com/v3/contacts',
@@ -51,9 +52,14 @@ app.post('/contact', (req, res) => {
             })   
 
     }).then(responseTwo => {
-        console.log(`response from GetRes: ${JSON.stringify(responseTwo)}`);
+        
+        const response = `All good. You'll get the newsletter soon!`
+        console.log('record saved')
+        res.send(JSON.stringify({"speech": response, "displayText": response}));
     }).catch(err => {
-        console.log(err);
+        console.log(`err from getResponse: ${err}`);
+        const errResponse = `Something went wrong`
+        res.send(JSON.stringify({"speech": errResponse, "displayText": errResponse}));
     });
 });
 
