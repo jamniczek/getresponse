@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     url: 'https://api.getresponse.com/v3/campaigns',
     headers: {'X-Auth-Token': keys.getResponseToken}
     }).then(response => {
-        console.log(response);
+        console.log('dupa');
         res.send(response.data);
     }).catch(err => {
         console.log(err);
@@ -28,7 +28,7 @@ app.post('/contact', (req, res) => {
 
     const userEmail = botData.result.parameters.email[0];
     const userPsid = botData.originalRequest.data.sender.id;
-    console.log(`req.body: ${JSON.stringify(req.body)}`);
+    console.log(`req.body: ${JSON.stringify(req)}`);
 
     axios.get(`https://graph.facebook.com/v2.6/${userPsid}?fields=first_name,last_name,profile_pic,locale&access_token=${keys.fbPageAccessToken}`)
     .then(response => {
