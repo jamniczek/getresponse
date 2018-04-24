@@ -51,7 +51,7 @@ app.post('/contact', (req, res) => {
             })   
 
     }).then(responseTwo => {
-        console.log(`response from GetRes: ${responseTwo.body}`);
+        console.log(`response from GetRes: ${responseTwo}`);
     }).catch(err => {
         console.log(err);
     });
