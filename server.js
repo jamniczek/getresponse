@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const campaign = require('./utils/campaign');
+const axios = require('axios');
 const fetchData = require('./utils/fetchData');
 
 const keys = require('./config/keys');
@@ -12,23 +12,23 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    axios({method: 'get',
+  axios({
+    method: 'get',
     url: 'https://api.getresponse.com/v3/campaigns',
-    headers: {'X-Auth-Token': keys.getResponseToken}
-    }).then(response => {
-        console.log('dupa');
-        res.send(response.data);
-    }).catch(err => {
-        console.log(err);
-    })
+    headers: { 'X-Auth-Token': keys.getResponseToken },
+  }).then((response) => {
+    console.log('dupa');
+    res.send(response.data);
+  }).catch((err) => {
+    console.log(err);
+  });
 });
 
 app.post('/contact', (req, res) => {
-    fetchData.sendResponseToUser(req, res);
+  fetchData.sendResponseToUser(req, res);
 });
 
 app.listen(PORT, () => {
-    console.log('Up and running');
+  console.log('Up and running');
 });
-
 
